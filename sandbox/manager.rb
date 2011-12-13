@@ -16,23 +16,31 @@
 # 2. should provide operator methods
 # 	- operators take seed implicitly
 # 3. defines local objects
-
+class ManagerError < Exception
+end
 
 class Manager
-	def initialize(*args)
-		Seed.new
+	def initialize(objects)
+    @seed_objects = seed
+
+    puts "Objects=#{@seed_objects}"
 	end
+
+  def seed
+    raise ManagerError, "'seed' method was not defined in Manager"
+  end
+
+  def virtual(name, *args) 
+    
+  end
 end
 
 
 class MyManager < Manager
-	class MyManager.Seed
-		def initialize
-			puts 'hello from seed'
-		end
-	end
+  def seed
+    %w{ala ma kota}
+  end
 end
-
 
 MyManager.new(%w(raz dwa trzy cztery))
 
